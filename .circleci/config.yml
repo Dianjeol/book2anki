@@ -15,20 +15,15 @@ jobs:
             pip install -r requirements.txt
             # Download NLTK resources
             python -c "import nltk; nltk.download('punkt'); nltk.download('averaged_perceptron_tagger'); nltk.download('wordnet'); nltk.download('omw-1.4')"
-      # Add steps for any tests when they are available
-      # - run:
-      #     name: Run tests
-      #     command: |
-      #       . venv/bin/activate
-      #       # Replace 'tests' with the path to your test files
-      #       python -m unittest discover tests
-      # - store_test_results:
-      #     path: test-results
-      #     # Ensure your tests produce results in the 'test-results' directory
+      - run:
+          name: Run tests
+          command: |
+            . venv/bin/activate
+            pytest --junitxml=junit.xml || ((($? == 5)) && echo 'Did not find any tests to run.' && exit 0)
+      # Add your deployment steps here
 
 workflows:
   version: 2
   build:
     jobs:
       - build
-
