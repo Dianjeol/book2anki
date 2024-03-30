@@ -1,0 +1,7 @@
+Flask==2.0.1
+genanki==0.11.0
+nltk==3.6.2
+gunicorn==20.1.0
+moviepy==1.0.3
+qrcode==6.1
+

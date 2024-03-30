@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary Checker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 35rem;
+            text-align: center;
+        }
+        h1 {
+            color: #007bff;
+            margin-bottom: 1rem;
+        }
+        ul {
+            text-align: left;
+            padding: 0;
+        }
+        li {
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 1rem;
+            display: block;
+            text-align: left;
+        }
+        input[type="file"],
+        input[type="range"],
+        input[type="submit"] {
+            width: 100%;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            border: 1px solid #ced4da;
+        }
+        input[type="submit"] {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+        .slider-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        .english-level {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+        .word-count {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Book to Anki!</h1>
+        <ul>
+            <li>Discover new words and expand your vocabulary.</li>
+            <li>Upload your book as a text file and optionally your personal known vocabulary list.</li>
+<li> (You can convert your book from pdf/epub/mobi to txt for free on many websites.)</li>
+            <li>Adjust the slider to include common English words up to your proficiency level.</li>
+            <li>Get a list of unknown words with definitions and example sentences and download as <b> Anki deck.</b></li>
+<li>Load time can be <b>up to one minute </b> for large files</i>
+        </ul>
+        <form action="/result" method="post" enctype="multipart/form-data">
+            <label for="book">Book (text file):</label>
+            <input type="file" name="book" required>
+            
+            <label for="vocab">Your Vocabulary List (optional, text file):</label>
+            <input type="file" name="vocab">
+            
+            <label for="base_vocab_size">Base Vocabulary Size:</label>
+            <div class="slider-container">
+                <input type="range" name="base_vocab_size" min="0" max="10000" value="0" oninput="updateEnglishLevel(this.value)" onchange="updateEnglishLevel(this.value)" required>
+                <span id="english-level" class="english-level">A1</span>
+                <span id="word-count" class="word-count">0 words</span>
+            </div>
+            
+            <input type="submit" value="Check Vocabulary">
+        </form>
+    </div>
+    <script>
+        function updateEnglishLevel(value) {
+            var level = 'A1';
+            if (value >= 1000) level = 'A2';
+            if (value >= 2000) level = 'B1';
+            if (value >= 4000) level = 'B2';
+            if (value >= 7000) level = 'C1';
+            document.getElementById('english-level').textContent = level;
+            document.getElementById('word-count').textContent = value + ' words';
+        }
+        updateEnglishLevel(0);
+    </script>
+</body>
+</html>
+

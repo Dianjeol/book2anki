@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary Check Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
+        .container { max-width: 700px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        h1 { color: #333; }
+        .download-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+        ul { list-style-type: none; padding: 0; }
+        li { padding: 10px; border-bottom: 1px solid #ddd; }
+        li:last-child { border-bottom: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Vocabulary Check Results</h1>
+
+        <p>Original number of words in the book: {{ original_words_count }}</p>
+        <p>Number of root words: {{ root_words_count }}</p>
+        <p>Number of words in user's vocabulary list: {{ user_vocab_count }}</p>
+        <p>Number of words in base vocabulary: {{ base_vocab_count }}</p>
+        <p>Number of words in combined vocabulary: {{ combined_vocab_count }}</p>
+        <p>Number of unknown words: {{ unknown_words_count }}</p>
+   
+        <a href="{{ url_for('download', deck_filename=deck_filename) }}" class="download-button">Download Anki Deck</a>
+     <h2>Unknown Root Words</h2>
+        <ul>
+            {% for word, defs_examps in unknown_words_defs_examps.items() %}
+                <li><strong>{{ word }}</strong> - {{ defs_examps.definition }}
+                    {% if defs_examps.example %}
+                        <br><em>Example:</em> {{ defs_examps.example }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+
+
