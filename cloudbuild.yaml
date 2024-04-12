@@ -1,0 +1,9 @@
+
+steps:
+    - name: 'gcr.io/cloud-builders/git'
+          args: ['clone', 'https://github.com/Dianjeol/book2anki', '.']
+              - name: 'gcr.io/cloud-builders/python'
+                    args: ['pip', 'install', '-r', 'requirements.txt']
+                        - name: 'gcr.io/cloud-builders/python'
+                              args: ['python', 'app.py']
+
