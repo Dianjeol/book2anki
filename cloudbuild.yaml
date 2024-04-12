@@ -6,4 +6,5 @@ steps:
   - name: 'gcr.io/cloud-builders/python'
     args: ['python', 'app.py']
 logsBucket: "test82737337"
+entrypoint: "python app.py"
 
