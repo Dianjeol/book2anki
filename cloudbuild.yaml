@@ -5,4 +5,5 @@ steps:
     args: ['pip', 'install', '-r', 'requirements.txt']
   - name: 'gcr.io/cloud-builders/python'
     args: ['python', 'app.py']
+logsBucket: "test82737337"
 
