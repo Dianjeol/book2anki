@@ -113,7 +113,8 @@ def result():
     deck_filename = create_anki_deck(unknown_words_defs_examps)
 
     return render_template('result.html',
-                           original_words_count=len(book_words),
+
+            original_words_count=len(book_words),
                            root_words_count=len(book_root_words),
                            user_vocab_count=len(user_vocab),
                            base_vocab_count=len(base_vocab),
@@ -132,4 +133,5 @@ def download(deck_filename):
     return "File not found", 404
 
 if __name__ == '__main__':
-    app.run(debug=True)
+     app.run(host="localhost", port=8080, debug=True)
+   # app.run(debug=True)
